@@ -8,7 +8,7 @@ image_resource:
     tag: "latest"
 
 inputs:
-- name: ola-nativos
+- name: git-repo
 
 run:
-  path: ola-nativos/ci/tasks/run-unit-tests.sh
+  path: git-repo/ci/tasks/unit.sh

@@ -2,7 +2,8 @@ groups:
 - name: main
   jobs:
   - unit-tests
-  - deploy-app
+  - build-artifact
+  - deploy
 
 resources:
 - name: git-repo

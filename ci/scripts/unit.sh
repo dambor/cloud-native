@@ -3,6 +3,6 @@
 set -xe
 
 export GRADLE_OPTS=-Dorg.gradle.native=false
-cd ola-nativos/ola-nativos
+cd git-repo/ola-nativos
 ./mvnw -v
 ./mvnw test
