@@ -1,0 +1,7 @@
+---
+applications:
+- name: ola-nativos
+  memory: 512M
+  instances: 1
+  random-route: false
+  path: target/ola-nativos-0.0.1-SNAPSHOT.jar
