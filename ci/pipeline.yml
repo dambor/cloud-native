@@ -1,0 +1,73 @@
+groups:
+- name: main
+  jobs:
+  - unit-tests
+  - deploy-app
+
+resources:
+- name: git-repo
+  type: git
+  source:
+    uri: {{git-repo}}
+    branch: master
+
+- name: deploy-prod-app
+  type: cf
+  source:
+    api: {{pws-api}}
+    organization: {{pws-organization}}
+    username: {{deploy-username}}
+    password: {{deploy-password}}
+    skip_cert_check: true
+    space: {{pws-space}}
+
+- name: release-candidate
+  type: github-release
+  source:
+    owner: {{git-user}}
+    repository: {{git-release-repo}}
+    access_token: {{git-access-token}}
+
+jobs:
+  - name: unit-tests
+    serial: true
+    public: true
+    plan:
+    - get: git-repo
+      trigger: true
+    - task: unit
+      file: git-repo/ci/tasks/unit.yml
+
+  - name: build-artifact
+    serial_groups: [version]
+    serial: true
+    plan:
+    - get: git-repo
+      passed: [unit-tests]
+      trigger: true
+    - task: build-artifact
+      file: git-repo/ci/tasks/build-artifact.yml
+      timeout: 5m
+      params:
+        base_name: ola-nativos
+    - put: release-candidate
+      params:
+        name: git-repo/ci/name
+        body: git-repo/ci/release-body
+        globs:
+          - artifact-dir/ola-nativos*.jar
+    - put: git-repo
+      params:
+        repository: git-repo
+
+  - name: deploy
+    plan:
+    - get: release-candidate
+      passed: [build-artifact]
+    - get: git-repo
+      passed: [build-artifact]
+    - put: deploy-prod-app
+      params:
+        manifest: gitrepo/manifest.yml
+        current_app_name: ola-nativos
+        path: release-candidate/ola-nativos*.jar

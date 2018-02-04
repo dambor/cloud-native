@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    rpository: brianbyers/concourse-gradle
+    tag: "latest"
+
+inputs:
+  - name: git-repo
+
+outputs:
+  - name: artifact-dir
+
+run:
+  path: git-repo/ci/scripts/build-artifact.sh 
