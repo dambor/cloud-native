@@ -2,7 +2,7 @@ groups:
 - name: main
   jobs:
   - unit-tests
-  - build-and-deploy
+  - build-artifact
 
 resources:
 - name: git-repo
@@ -40,7 +40,7 @@ jobs:
     - task: unit
       file: git-repo/ci/tasks/unit.yml
 
-  - name: build-and-deploy
+  - name: build-artifact
     serial_groups: [version]
     serial: true
     plan:
@@ -54,8 +54,16 @@ jobs:
       timeout: 5m
       params:
         base_name: ola-nativos
-    - put: deploy-prod-app
+    - put: release-candidate
       params:
-        manifest: git-repo/manifest.yml
-        current_app_name: ola-nativos
-        path: artifact-dir/ola-nativos-1.0.0-rc.1.jar
+        name: git-repo/ci/name
+        tag: version/number
+        body: git-repo/ci/release-body
+        globs:
+          - artifact-dir/ola-nativos*.jar
+    - put: git-repo
+      params:
+        repository: git-repo
+        tag: version/number
+    - put: version
+      params: {file: version/number}
