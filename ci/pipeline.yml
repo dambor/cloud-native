@@ -68,7 +68,7 @@ jobs:
         tag: version/number
         body: git-repo/ci/release-body
         globs:
-          - artifact-dir/ola-nativos*.jar
+          - artifact-dir/ola-nativos-1.0.0-rc.1.jar
     - put: git-repo
       params:
         repository: git-repo
