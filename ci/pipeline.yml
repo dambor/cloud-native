@@ -56,6 +56,6 @@ jobs:
         base_name: ola-nativos
     - put: deploy-prod-app
       params:
-        manifest: gitrepo/manifest.yml
+        manifest: git-repo/manifest.yml
         current_app_name: ola-nativos
         path: artifact-dir/ola-nativos*.jar
