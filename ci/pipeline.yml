@@ -54,7 +54,7 @@ jobs:
         name: git-repo/ci/name
         body: git-repo/ci/release-body
         globs:
-          - artifact-dir/ola-nativos*.jar
+          - target/ola-nativos*.jar
     - put: git-repo
       params:
         repository: git-repo
