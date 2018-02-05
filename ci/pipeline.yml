@@ -32,13 +32,6 @@ resources:
     private_key: {{GIT_PRIVATE_KEY}}
     initial_version: 1.0.0
 
-- name: release-candidate
-  type: github-release
-  source:
-    owner: {{GIT_USER}}
-    repository: {{GIT_RELEASE_REPO}}
-    access_token: {{GIT_ACCESS_TOKEN}}
-
 jobs:
   - name: unit-tests
     plan:
