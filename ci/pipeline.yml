@@ -2,8 +2,7 @@ groups:
 - name: main
   jobs:
   - unit-tests
-  - build-artifact
-  - deploy
+  - build-and-deploy
 
 resources:
 - name: git-repo
@@ -48,7 +47,7 @@ jobs:
     - task: unit
       file: git-repo/ci/tasks/unit.yml
 
-  - name: build-artifact
+  - name: build-and-deploy
     serial_groups: [version]
     serial: true
     plan:
