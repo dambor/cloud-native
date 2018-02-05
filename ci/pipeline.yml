@@ -3,6 +3,7 @@ groups:
   jobs:
   - unit-tests
   - build-artifact
+  - deploy
 
 resources:
 - name: git-repo
@@ -21,6 +22,13 @@ resources:
     password: {{PWS_PASSWORD}}
     skip_cert_check: true
     space: {{PWS_SPACE}}
+
+- name: release-candidate
+  type: github-release
+  source:
+    owner: {{GIT_USER}}
+    repository: {{GIT_RELEASE_REPO}}
+    access_token: {{GIT_ACCESS_TOKEN}}
 
 - name: version
   type: semver
@@ -67,3 +75,20 @@ jobs:
         tag: version/number
     - put: version
       params: {file: version/number}
+
+  - name: deploy
+    serial_groups: [version]
+    plan:
+    - aggregate:
+      - get: version
+        passed: [build-artifact]
+        trigger: true
+      - get: release-candidate
+        passed: [build-artifact]
+      - get: git-repo
+        passed: [build-artifact]
+    - put: deploy-prod-app
+      params:
+        manifest: git-repo/manifest.yml
+        current_app_name: ola-nativos
+        path: release-candidate/ola-nativos*.jar
