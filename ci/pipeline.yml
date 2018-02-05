@@ -9,26 +9,26 @@ resources:
 - name: git-repo
   type: git
   source:
-    uri: {{git-repo}}
+    uri: {{GIT_REPO}}
     branch: master
-    private_key: {{git-private_key}}
+    private_key: {{GIT_PRIVATE_KEY}}
 
 - name: deploy-prod-app
   type: cf
   source:
-    api: {{pws-api}}
-    organization: {{pws-organization}}
-    username: {{deploy-username}}
-    password: {{deploy-password}}
+    api: {{PWS_API}}
+    organization: {{PWS_ORG}}
+    username: {{PWS_USER}}
+    password: {{PWS_PASSWORD}}
     skip_cert_check: true
-    space: {{pws-space}}
+    space: {{PWS_SPACE}}
 
 - name: release-candidate
   type: github-release
   source:
-    owner: {{git-user}}
-    repository: {{git-release-repo}}
-    access_token: {{git-access-token}}
+    owner: {{GIT_USER}}
+    repository: {{GIT_RELEASE_REPO}}
+    access_token: {{GIT_ACCESS_TOKEN}}
 
 jobs:
   - name: unit-tests
