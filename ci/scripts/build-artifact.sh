@@ -3,4 +3,5 @@ set -xe
 
 cd git-repo/ola-nativos
 ./mvnw install
-ls target/*.jar 
+cp target/*.jar ../artifact-dir/${base_name}*.jar
+ls ../artifact-dir
