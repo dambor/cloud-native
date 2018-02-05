@@ -11,6 +11,7 @@ resources:
   source:
     uri: {{git-repo}}
     branch: master
+    private_key: {{git-private_key}}
 
 - name: deploy-prod-app
   type: cf
@@ -31,8 +32,6 @@ resources:
 
 jobs:
   - name: unit-tests
-    serial: true
-    public: true
     plan:
     - get: git-repo
       trigger: true
@@ -40,7 +39,6 @@ jobs:
       file: git-repo/ci/tasks/unit.yml
 
   - name: build-artifact
-    serial_groups: [version]
     serial: true
     plan:
     - get: git-repo
