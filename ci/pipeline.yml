@@ -58,4 +58,4 @@ jobs:
       params:
         manifest: git-repo/manifest.yml
         current_app_name: ola-nativos
-        path: artifact-dir/ola-nativos*.jar
+        path: artifact-dir/ola-nativos-1.0.0-rc.1.jar
