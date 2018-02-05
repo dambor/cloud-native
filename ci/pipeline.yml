@@ -62,28 +62,8 @@ jobs:
       timeout: 5m
       params:
         base_name: ola-nativos
-    - put: release-candidate
-      params:
-        name: git-repo/ci/name
-        tag: version/number
-        body: git-repo/ci/release-body
-        globs:
-          - artifact-dir/ola-nativos*.jar
-    - put: git-repo
-      params:
-        repository: git-repo
-        tag: version/number
-    - put: version
-      params: {file: version/number}
-
-  - name: deploy
-    plan:
-    - get: release-candidate
-      passed: [build-artifact]
-    - get: git-repo
-      passed: [build-artifact]
     - put: deploy-prod-app
       params:
         manifest: gitrepo/manifest.yml
         current_app_name: ola-nativos
-        path: release-candidate/ola-nativos*.jar
+        path: artifact-dir/ola-nativos*.jar
