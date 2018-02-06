@@ -13,12 +13,12 @@ public class OlaNativosApplication {
 	}
 }
 
-
 @RestController
-class greetingsRestControler {
+class GreetingsRestController {
 
 	@GetMapping("/hi")
 	String hi() {
-		return "Ola Nativos!!";
+		return "Ola Nativos na Nuvem!!!";
 	}
+
 }
