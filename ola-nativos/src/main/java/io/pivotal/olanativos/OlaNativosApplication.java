@@ -18,7 +18,6 @@ class GreetingsRestController {
 
 	@GetMapping("/hi")
 	String hi() {
-		return "Ola Nativos na Nuvem!!!";
+		return "Ola nativos na nuvem!";
 	}
-
 }
