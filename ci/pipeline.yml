@@ -92,9 +92,3 @@ jobs:
         manifest: git-repo/manifest.yml
         current_app_name: ola-nativos
         path: release-candidate/ola-nativos*.jar
-
-  - name: major
-    serial_groups: [ version ]
-    plan:
-      - put: version
-        params: { bump: major, pre: rc }
