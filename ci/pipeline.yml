@@ -22,7 +22,6 @@ resources:
     password: {{PWS_PASSWORD}}
     skip_cert_check: true
     space: {{PWS_SPACE}}
-    skip_cert_check: true
 
 - name: release-candidate
   type: github-release
