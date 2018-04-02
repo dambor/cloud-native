@@ -2,5 +2,5 @@
 applications:
 - name: ola-nativos
   memory: 1G
-  instances: 2
+  instances: 1
   random-route: false
