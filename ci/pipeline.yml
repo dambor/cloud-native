@@ -61,14 +61,14 @@ jobs:
       file: git-repo/ci/tasks/build-artifact.yml
       timeout: 5m
       params:
-        base_name: ola-nativos
+        base_name: cloud-native
     - put: release-candidate
       params:
         name: git-repo/ci/name
         tag: version/number
         body: git-repo/ci/release-body
         globs:
-          - artifact-dir/ola-nativos*.jar
+          - artifact-dir/cloud-native*.jar
     - put: git-repo
       params:
         repository: git-repo
@@ -90,5 +90,5 @@ jobs:
     - put: deploy-prod-app
       params:
         manifest: git-repo/manifest.yml
-        current_app_name: ola-nativos
-        path: release-candidate/ola-nativos*.jar
+        current_app_name: cloud-native
+        path: release-candidate/cloud-native*.jar
