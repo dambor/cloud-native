@@ -1,6 +1,6 @@
 ---
 applications:
-- name: cloud-native-gdb
+- name: cloud-native-app
   memory: 1G
   instances: 2
   random-route: false
