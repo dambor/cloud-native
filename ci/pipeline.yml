@@ -90,5 +90,5 @@ jobs:
     - put: deploy-prod-app
       params:
         manifest: git-repo/manifest.yml
-        current_app_name: cloud-native
+        current_app_name: cloud-native-gdb
         path: release-candidate/cloud-native*.jar
