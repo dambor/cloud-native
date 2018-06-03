@@ -1,6 +1,6 @@
 ---
 applications:
-- name: ola-nativos
+- name: cloud-native-gdb
   memory: 1G
   instances: 2
   random-route: false
